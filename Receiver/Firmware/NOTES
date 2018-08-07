@@ -1,0 +1,25 @@
+IR Receiver functionality
+
+Program mode using python program:
+- asks user to press a particular button
+- accepts value once it has been successfully received 3 times consecutively
+- asks user if they want to save the value in EEPROM
+
+= RCA remote control =
+RCA remote control signals are not recognized by IRLIB2 library.
+- IR Scrutinizer decodes the protocol as: protocol = RCA-38, device = 15, obc = 47
+
+https://www.sbprojects.net/knowledge/ir/rca.php
+http://www.numericana.com/answer/ir.htm#rca
+
+(2014-05-04)   Thomson / RCA Protocol
+56 kHz modulation.  Pulse-distance encoding.
+
+    Each burst has a fixed width of 0.5 ms  (28 cycles).  A logical "0" is a burst followed by  1 ms  (56 cycles)  of silence  (for a total duration of 1.5 ms).  A logical "1" is a burst followed by a space of 2 ms  (2.5 ms total duration).
+
+    A frame starts with a 4 ms burst (224 cycles) followed by a 4 ms space.  The 12-bit data is then sent most significant bits first,  first a 4-bit address then an 8-bit command.  The complements of those 12-bits are then sent in the same order to validate the data.  The total duration to this point is always  56 ms.  An 8 ms stop space brings the duration of a frame to 64 ms.
+
+    The same frame is sent repeatedly as long as the key is pressed.  (No toggle bit?!)
+
+
+https://github.com/z3t0/Arduino-IRremote/pull/533/commits/f5d50e4e6a8adea210b7d48d37e4d94a824d2f24
